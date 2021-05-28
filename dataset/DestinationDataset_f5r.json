@@ -1,0 +1,17 @@
+{
+	"name": "DestinationDataset_f5r",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "TEST",
+			"table": "TESTTBL"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

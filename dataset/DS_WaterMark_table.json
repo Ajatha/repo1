@@ -1,0 +1,28 @@
+{
+	"name": "DS_WaterMark_table",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Table_name",
+				"type": "varchar"
+			},
+			{
+				"name": "Water_Mark_value",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "WaterMarkTable"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

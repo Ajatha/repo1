@@ -1,0 +1,24 @@
+{
+	"name": "DestinationDataset_ejj",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "COL1",
+				"type": "nvarchar",
+				"precision": 0,
+				"scale": 0
+			}
+		],
+		"typeProperties": {
+			"schema": "TEST",
+			"table": "TESTTBL"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

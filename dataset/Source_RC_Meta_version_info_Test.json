@@ -1,0 +1,17 @@
+{
+	"name": "Source_RC_Meta_version_info_Test",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Oracle2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "OracleTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "OA_HERE_MAPS",
+			"table": "RC_META_VERSION_INFO_TEST"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

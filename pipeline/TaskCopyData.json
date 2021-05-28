@@ -1,0 +1,482 @@
+{
+	"name": "TaskCopyData",
+	"properties": {
+		"activities": [
+			{
+				"name": "ForEach_eu4",
+				"type": "ForEach",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@pipeline().parameters.cw_items",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "Copy_eu4",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [
+								{
+									"name": "Source",
+									"value": "APPQOSSYS.@{item().source.table}"
+								},
+								{
+									"name": "Destination",
+									"value": "APPQOSSYS.@{item().destination.table}"
+								}
+							],
+							"typeProperties": {
+								"source": {
+									"type": "OracleSource",
+									"partitionOption": "None"
+								},
+								"sink": {
+									"type": "AzureSqlSink",
+									"tableOption": "autoCreate"
+								},
+								"enableStaging": false,
+								"parallelCopies": 2,
+								"validateDataConsistency": true,
+								"logSettings": {
+									"enableCopyActivityLog": true,
+									"copyActivityLogSettings": {
+										"logLevel": "Warning",
+										"enableReliableLogging": false
+									},
+									"logLocationSettings": {
+										"linkedServiceName": {
+											"referenceName": "linkedService1",
+											"type": "LinkedServiceReference"
+										},
+										"path": ""
+									}
+								},
+								"translator": {
+									"value": "@item().copyActivity.translator",
+									"type": "Expression"
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "SourceDataset_eu4",
+									"type": "DatasetReference",
+									"parameters": {
+										"cw_table": "@item().source.table"
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "DestinationDataset_eu4",
+									"type": "DatasetReference",
+									"parameters": {
+										"cw_table": "@item().destination.table"
+									}
+								}
+							]
+						}
+					]
+				}
+			}
+		],
+		"parameters": {
+			"cw_items": {
+				"type": "Array",
+				"defaultValue": [
+					{
+						"source": {
+							"table": "WLM_CLASSIFIER_PLAN"
+						},
+						"destination": {
+							"table": "WLM_CLASSIFIER_PLAN"
+						},
+						"copyActivity": {
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "OPER",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "OPER",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"name": "NCLSRS",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "NCLSRS",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"name": "CLPCSTR",
+											"type": "String"
+										},
+										"sink": {
+											"name": "CLPCSTR",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ACTIVE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ACTIVE",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "SEQNO",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "SEQNO",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"name": "TIMESTAMP",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "TIMESTAMP",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "CHKSUM",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "CHKSUM",
+											"type": "Double"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						}
+					},
+					{
+						"source": {
+							"table": "WLM_FEATURE_USAGE"
+						},
+						"destination": {
+							"table": "WLM_FEATURE_USAGE"
+						},
+						"copyActivity": {
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "TIMESTAMP",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "TIMESTAMP",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "MODEBTIME",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "MODEBTIME",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "CURMODE",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "CURMODE",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"name": "PREVMODE",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "PREVMODE",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"name": "MAXPC",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "MAXPC",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"name": "CURNUMPC",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "CURNUMPC",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"name": "MANAGED",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "MANAGED",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"name": "MEASUREONLY",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "MEASUREONLY",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"name": "MONITOR",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "MONITOR",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"name": "MANAGED_CUMTIME",
+											"type": "String"
+										},
+										"sink": {
+											"name": "MANAGED_CUMTIME",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "MEASUREONLY_CUMTIME",
+											"type": "String"
+										},
+										"sink": {
+											"name": "MEASUREONLY_CUMTIME",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "MONITOR_CUMTIME",
+											"type": "String"
+										},
+										"sink": {
+											"name": "MONITOR_CUMTIME",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "USED",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "USED",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"name": "STATS1",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "STATS1",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"name": "STATS2",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "STATS2",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"name": "STATS3",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "STATS3",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"name": "FEATURE_INFO",
+											"type": "String"
+										},
+										"sink": {
+											"name": "FEATURE_INFO",
+											"type": "String"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						}
+					},
+					{
+						"source": {
+							"table": "WLM_METRICS_STREAM"
+						},
+						"destination": {
+							"table": "WLM_METRICS_STREAM"
+						},
+						"copyActivity": {
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "TIMESTAMP",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "TIMESTAMP",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "PC",
+											"type": "String"
+										},
+										"sink": {
+											"name": "PC",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "NEGATIVE_INTERVAL",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "NEGATIVE_INTERVAL",
+											"type": "Double"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						}
+					},
+					{
+						"source": {
+							"table": "WLM_MPA_STREAM"
+						},
+						"destination": {
+							"table": "WLM_MPA_STREAM"
+						},
+						"copyActivity": {
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "NAME",
+											"type": "String"
+										},
+										"sink": {
+											"name": "NAME",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "SERVERORPOOL",
+											"type": "String"
+										},
+										"sink": {
+											"name": "SERVERORPOOL",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "RISKLEVEL",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "RISKLEVEL",
+											"type": "Double"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						}
+					}
+				]
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-05-23T07:19:59Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

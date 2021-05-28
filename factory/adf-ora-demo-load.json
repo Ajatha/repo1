@@ -1,0 +1,9 @@
+{
+	"name": "adf-ora-demo-load",
+	"location": "australiaeast",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "e4319cec-de90-4548-a8f5-7e7ef85fa19c",
+		"tenantId": "173d611e-e418-4350-be1e-2b35a376875e"
+	}
+}

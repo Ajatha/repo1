@@ -1,0 +1,17 @@
+{
+	"name": "Source_config_table",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Oracle2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "OracleTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "OA_HERE_MAPS",
+			"table": "CONFIG_SOURCE_TABLE"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
